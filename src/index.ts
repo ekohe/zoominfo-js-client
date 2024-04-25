@@ -7,10 +7,18 @@ import type {
 	ContactSearchResult,
 } from "./types"
 
-const apiRequest = <P, R>(url: string, params: P): Promise<R> => {
+const apiRequest = <P, R>(
+	url: string,
+	params: P,
+	token: string,
+): Promise<R> => {
 	return new Promise((resolve, reject) => {
 		fetch(url, {
 			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
 			body: params ? JSON.stringify(params) : undefined,
 		})
 			.then((response) => {
@@ -39,24 +47,27 @@ const ZoomInfoURLs = {
 }
 
 const useZoomInfo = () => {
-	const companySearch = (params: CompanySearchParams) => {
+	const companySearch = (params: CompanySearchParams, token: string) => {
 		return apiRequest<CompanySearchParams, CompanySearchResult>(
 			ZoomInfoURLs.search.company,
 			params,
+			token,
 		)
 	}
 
-	const contactSearch = (params: ContactSearchParams) => {
+	const contactSearch = (params: ContactSearchParams, token: string) => {
 		return apiRequest<ContactSearchParams, ContactSearchResult>(
 			ZoomInfoURLs.search.contact,
 			params,
+			token,
 		)
 	}
 
-	const contactEnrich = (params: ContactEnrichParams) => {
+	const contactEnrich = (params: ContactEnrichParams, token: string) => {
 		return apiRequest<ContactEnrichParams, ContactEnrichResult>(
 			ZoomInfoURLs.enrich.contact,
 			params,
+			token,
 		)
 	}
 

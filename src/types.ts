@@ -49,6 +49,9 @@ export interface ContactSearchParams {
 	supplementalEmail?: string[]
 	hashedEmail?: string
 	phone?: string[]
+	companyId?: string
+	companyName?: string
+	managementLevel?: string
 }
 
 interface ContactSearchResultItem {
@@ -77,27 +80,44 @@ interface ContactSearchResultItem {
 
 export type ContactSearchResult = SearchResult<ContactSearchResultItem>
 
-export interface ContactEnrichParams {
-	personId?: number | string
-	fullName?: string
-	firstName?: string
-	lastName?: string
-	emailAddress?: string
-	phone?: string
-	jobTitle?: string
-	hashedEmail?: string
-	externalURL?: string
-	lastUpdatedDateAfter?: string
-	validDateAfter?: string
-	companyId?: number | string
-	companyName?: string
-	contactAccuracyScoreMin?: number
+export interface ContactEnrichInputField {
+	personId: number | string
+	fullName: string
+	firstName: string
+	lastName: string
+	emailAddress: string
+	phone: string
+	jobTitle: string
+	hashedEmail: string
+	externalURL: string
+	lastUpdatedDateAfter: string
+	validDateAfter: string
+	companyId: number | string
+	companyName: string
+	contactAccuracyScoreMin: number
 }
 
-export interface ContactEnrichResult extends PlainObjectType {
+export interface ContactEnrichOutputField extends PlainObjectType {
 	id: number
-	firstname: string
+	firstName: string
 	middleName: string
 	lastName: string
 	email: string
+}
+
+export interface ContactEnrichParams {
+	matchPersonInput: Partial<ContactEnrichInputField>[]
+	outputFields: (keyof ContactEnrichOutputField)[]
+}
+
+export interface ContactEnrichResult {
+	success: boolean
+	data: {
+		outputFields: (keyof ContactEnrichOutputField)[]
+		result: {
+			input: Partial<ContactEnrichInputField>
+			data: Partial<ContactEnrichOutputField>[]
+			matchStatus: string
+		}[]
+	}
 }
