@@ -1,5 +1,5 @@
 {
-	"name": "react-zoominfo",
+	"name": "zoominfo-js-client",
 	"version": "1.0.0",
 	"description": "",
 	"main": "src/index.ts",
