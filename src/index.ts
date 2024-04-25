@@ -46,7 +46,7 @@ const ZoomInfoURLs = {
 	},
 }
 
-const useZoomInfo = () => {
+const ZoomInfoClient = () => {
 	const companySearch = (params: CompanySearchParams, token: string) => {
 		return apiRequest<CompanySearchParams, CompanySearchResult>(
 			ZoomInfoURLs.search.company,
@@ -78,4 +78,4 @@ const useZoomInfo = () => {
 	}
 }
 
-export default useZoomInfo
+export default ZoomInfoClient
