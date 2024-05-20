@@ -23,11 +23,12 @@ const apiRequest = <P, R>(
 		})
 			.then((response) => {
 				if (response.ok) {
-					const jsonData = response.json()
-					resolve(jsonData as R)
-					return
+					return response.json()
 				}
 				reject(new Error(response.statusText))
+			})
+			.then((data) => {
+				resolve(data as R)
 			})
 			.catch((error) => {
 				reject(error)
