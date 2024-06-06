@@ -37,20 +37,29 @@ const apiRequest = <P, R>(
 }
 
 const ZoomInfoURLs = {
+	baseURL: "https://api.zoominfo.com",
 	search: {
-		company: "https://api.zoominfo.com/search/company",
-		contact: "https://api.zoominfo.com/search/contact",
+		company: "/search/company",
+		contact: "/search/contact",
 	},
 	enrich: {
-		company: "https://api.zoominfo.com/enrich/company",
-		contact: "https://api.zoominfo.com/enrich/contact",
+		company: "/enrich/company",
+		contact: "/enrich/contact",
 	},
 }
 
-const ZoomInfoClient = () => {
+const ZoomInfoClient = (props: {
+	handleBaseURL?: (baseURL: string) => string
+}) => {
+	const { handleBaseURL } = props
+
+	const baseURL = handleBaseURL
+		? handleBaseURL(ZoomInfoURLs.baseURL)
+		: ZoomInfoURLs.baseURL
+
 	const companySearch = (params: CompanySearchParams, token: string) => {
 		return apiRequest<CompanySearchParams, CompanySearchResult>(
-			ZoomInfoURLs.search.company,
+			baseURL + ZoomInfoURLs.search.company,
 			params,
 			token,
 		)
@@ -58,7 +67,7 @@ const ZoomInfoClient = () => {
 
 	const contactSearch = (params: ContactSearchParams, token: string) => {
 		return apiRequest<ContactSearchParams, ContactSearchResult>(
-			ZoomInfoURLs.search.contact,
+			baseURL + ZoomInfoURLs.search.contact,
 			params,
 			token,
 		)
@@ -66,7 +75,7 @@ const ZoomInfoClient = () => {
 
 	const contactEnrich = (params: ContactEnrichParams, token: string) => {
 		return apiRequest<ContactEnrichParams, ContactEnrichResult>(
-			ZoomInfoURLs.enrich.contact,
+			baseURL + ZoomInfoURLs.enrich.contact,
 			params,
 			token,
 		)

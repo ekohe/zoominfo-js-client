@@ -25,24 +25,29 @@ var apiRequest = function (url, params, token) {
     });
 };
 var ZoomInfoURLs = {
+    baseURL: "https://api.zoominfo.com",
     search: {
-        company: "https://api.zoominfo.com/search/company",
-        contact: "https://api.zoominfo.com/search/contact",
+        company: "/search/company",
+        contact: "/search/contact",
     },
     enrich: {
-        company: "https://api.zoominfo.com/enrich/company",
-        contact: "https://api.zoominfo.com/enrich/contact",
+        company: "/enrich/company",
+        contact: "/enrich/contact",
     },
 };
-var ZoomInfoClient = function () {
+var ZoomInfoClient = function (props) {
+    var handleBaseURL = props.handleBaseURL;
+    var baseURL = handleBaseURL
+        ? handleBaseURL(ZoomInfoURLs.baseURL)
+        : ZoomInfoURLs.baseURL;
     var companySearch = function (params, token) {
-        return apiRequest(ZoomInfoURLs.search.company, params, token);
+        return apiRequest(baseURL + ZoomInfoURLs.search.company, params, token);
     };
     var contactSearch = function (params, token) {
-        return apiRequest(ZoomInfoURLs.search.contact, params, token);
+        return apiRequest(baseURL + ZoomInfoURLs.search.contact, params, token);
     };
     var contactEnrich = function (params, token) {
-        return apiRequest(ZoomInfoURLs.enrich.contact, params, token);
+        return apiRequest(baseURL + ZoomInfoURLs.enrich.contact, params, token);
     };
     return {
         companySearch: companySearch,

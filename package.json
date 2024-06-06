@@ -1,11 +1,11 @@
 {
 	"name": "zoominfo-js-client",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "",
 	"main": "dist/index.js",
 	"files": ["src"],
 	"scripts": {
-		"build": "tsc"
+		"build": "rm -rf ./dist & tsc"
 	},
 	"keywords": [],
 	"author": "<lu.hao@ekohe.com>",
