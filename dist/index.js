@@ -8,6 +8,7 @@ var apiRequest = function (url, params, token) {
                 "Content-Type": "application/json",
                 Authorization: "Bearer ".concat(token),
             },
+            mode: "cors",
             body: params ? JSON.stringify(params) : undefined,
         })
             .then(function (response) {

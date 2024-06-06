@@ -19,6 +19,7 @@ const apiRequest = <P, R>(
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
+			mode: "cors",
 			body: params ? JSON.stringify(params) : undefined,
 		})
 			.then((response) => {
