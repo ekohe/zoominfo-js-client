@@ -52,6 +52,8 @@ export interface ContactSearchParams {
 	companyId?: string
 	companyName?: string
 	managementLevel?: string
+	fullName?: string
+	jobTitle?: string
 }
 
 interface ContactSearchResultItem {
