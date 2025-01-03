@@ -1,4 +1,4 @@
-# ZoomInfo Client Library
+# ZoomInfo Client - JS Library (2024 Active)
 
 The ZoomInfo Client Library is a TypeScript/JavaScript library for interacting with the ZoomInfo API. This library facilitates operations for searching companies and contacts, as well as enriching contact information.
 
